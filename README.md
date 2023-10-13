@@ -1,43 +1,4 @@
-<p align="center">
-  <a href="https://fullcycle.com.br/" target="blank"><img src="https://fullcycle.com.br/wp-content/themes/fullcycle/assets/images/fullcycle-logo.svg"/></a>
-</p>
-
 # Guia rápido do WSL2 + Docker
-
-*Read this in other language: [English](README.en.md)
-
-## Sumário
-
-- [O que é o WSL2](#o-que-é-o-wsl2)
-- [Requisitos mínimos](#requisitos-mínimos)
-- [Instalação do WSL 2](#instalação-do-wsl-2)
-  - [Windows Update](#windows-update)
-  - [Atualizar o WSL](#atualizar-o-wsl)
-  - [Atribuir a versão default do WSL para a versão 2](#atribuir-a-versão-default-do-wsl-para-a-versão-2)
-  - [Instale o Ubuntu](#instale-o-ubuntu)
-  - [(Opcional) Alterar a versão de uma distribuição do Linux de WSL 1 para WSL 2](#opcional-alterar-a-versão-de-uma-distribuição-do-linux-de-wsl-1-para-wsl-2)
-  - [Instalação do WSL 2 via Windows Store](#instalação-do-wsl-2-via-windows-store)
-- [(Opcional/Mas Recomendado) Usar Windows Terminal como terminal padrão de desenvolvimento para Windows](#opcionalmas-recomendado-usar-windows-terminal-como-terminal-padrão-de-desenvolvimento-para-windows)
-- [O que o WSL 2 pode usar de recursos da minha máquina?](#o-que-o-wsl-2-pode-usar-de-recursos-da-sua-máquina)
-- [O que é o Docker](#o-que-é-docker)
-  - [Porque usar WSL 2 + Docker para desenvolvimento](#porque-usar-wsl-2--docker-para-desenvolvimento)
-  - [Modo de usar Docker no Windows](#modos-de-usar-docker-no-windows)
-  - [(Obsoleto) Docker Toolbox](#obsoleto-docker-toolbox)
-  - [(Obsoleto) Docker Desktop com Hyper-V](#obsoleto-docker-desktop-com-hyper-v)
-  - [Docker Desktop com WSL 2](#docker-desktop-com-wsl2)
-    - [Vantagens](#docker-desktop-vantagens)
-    - [Desvantagens](#docker-desktop-desvantagens)
-  - [Docker Engine (Docker Nativo) diretamente instalado no WSL2](#docker-engine-docker-nativo-diretamente-instalado-no-wsl2)
-    - [Vantagens](#docker-engine-vantagens)
-    - [Desvantagens](#docker-engine-desvantagens)
-  - [Integrar Docker com WSL 2](#integrar-docker-com-wsl-2)
-    - [1 - Instalar o Docker com Docker Engine (Docker Nativo)](#1---instalar-o-docker-com-docker-engine-docker-nativo)
-      - [Erro ao iniciar o Docker no Ubuntu 22.04](#erro-ao-iniciar-o-docker-no-ubuntu-2204)
-    - [2 - Instalar o Docker com Docker Desktop](#2---instalar-o-docker-com-docker-desktop)
-- [Dicas e truques básicos com WSL 2](#dicas-e-truques-básicos-com-wsl-2)
-- [Dúvidas](#dúvidas)
-- [Quer dicas como ser mais produtivo no Windows?](#quer-dicas-como-ser-mais-produtivo-no-windows)
-
 
 ## O que é o WSL2 
 
@@ -189,51 +150,7 @@ Veja nossa **live sobre WSL 2 + Docker no canal Full Cycle**: [https://www.youtu
 
 ### Modos de usar Docker no Windows
 
-* (Obsoleto) [Docker Toolbox](#obsoleto-docker-toolbox)
-* (Obsoleto) [Docker Desktop com Hyper-V](#obsoleto-docker-desktop-com-hyper-v).
-* [Docker Desktop com WSL2](#docker-desktop-com-wsl2).
 * [Docker Engine (Docker Nativo) diretamente instalado no WSL2](#docker-engine-docker-nativo-diretamente-instalado-no-wsl2).
-
-### (Obsoleto) Docker Toolbox
-
-Roda em cima do programa de virtualização de sistemas da Oracle, chamado de **VirtualBox**.
-O desempenho do Docker Toolbox pode ser muito ruim, inviabilizando seu uso.
-
-Pode ainda ser usado em Windows mais antigos, como XP, Vista, 7, 8 e 8.1.
-
-### (Obsoleto) Docker Desktop com Hyper-V
-
-Roda em cima do **Hyper-V** da Microsoft em vez de usar o VirtualBox usando pelo Docker Toolbox. O Docker Desktop com Hyper-V necessita da versão **PRO** do Windows 10/11, portanto é necessário compra-la se você não a tem.
-
-O Hyper-V costuma requerer muitos recursos da máquina e apesar do desempenho ser melhor que o Docker Toolbox, a máquina pode ficar lenta para se utilizar outras coisas no Windows.
-
-*A Docker já removeu o suporte ao Hyper-V.*
-
-### Docker Desktop com WSL2
-
-Roda em cima do **Virtual Machine Platform** que é um componente do Hyper-V. 
-
-Se integra com o WSL2 permitindo rodar o Docker dentro do ambiente do Linux. 
-
-Não é necessário adquirir licença PRO do Windows 10/11. T
-
-Tem um grande desempenho e consome menos recursos quando comparado ao Docker Toolbox ou Docker Desktop com Hyper-V.
-
-Tem-se a grande vantagem de se trabalhar totalmente dentro do Linux para desenvolvimento, portanto, usar WSL2 + Docker é a melhor maneira de se desenvolver aplicações no Windows.
-
-#### <a id="docker-desktop-vantagens"></a> Vantagens
-
-* Simplifica a configuração do Docker tanto no Windows quanto no WSL 2.
-* Permite rodar o Docker fora do WSL 2, sendo possível usar qualquer shell como PowerShell ou DOS.
-* Suporta containers em modo Windows (Imagens que contém Windows por debaixo dos panos ao invés de Linux).
-* Cria um ambiente centralizado para armazenamento de imagens, volumes e outras configurações Docker. Pode-se ter várias distribuições do WSL 2 rodando a mesma instância do Docker.
-* Interface visual para administrar o Docker.
-
-#### <a id="docker-desktop-desvantagens"></a> Desvantagens
-
-* Uso de memória inicial sem rodar nenhum container Docker pode chegar a 3GB.
-* Adiciona infraestrutura complexa para executar Docker, quando se necessita apenas de rodar os containers Docker dentro de um WSL apenas.
-
 
 ### Docker Engine (Docker Nativo) diretamente instalado no WSL2
 
@@ -343,6 +260,18 @@ Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docke
 
 O Docker Compose instalado agora estará na versão 2, para executa-lo em vez de `docker-compose` use `docker compose`.
 
+#### Caso dê um erro referente aos credenciais de acesso do docker, siga esses passos:
+
+```
+Abra a pasta do WSL2 do seu computador, geralmente fica como se fosse uma máquina externa plugada no PC
+
+Dentro vá até a pasta /home/user/.docker
+
+Nessa pasta você verá um arquivo chamado config.json
+
+Delete a linha referente a credsStore
+```
+
 #### Erro ao iniciar o Docker no Ubuntu 22.04
 
 > Se mesmo ao iniciar o serviço do Docker acontecer o seguinte erro ou similar:
@@ -373,14 +302,6 @@ command = service docker start
 Quando terminar a edição, pressione `Esc`, em seguida tecle `:` para entrar com o comando `wq` (salvar e sair) e pressione `enter`. 
 
 Pronto, basta reiniciar o WSL com o comando `wsl --shutdown` no DOS ou PowerShell para testar. Após abrir o WSL novamente, digite o comando `docker ps` para avaliar se o comando não retorna a mensagem acima: `Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?`
-
-### <a id="instalar-o-docker-com-docker-desktop"></a>2 - Instalar o Docker com Docker Desktop
-
-Baixe neste link: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/) e instale o Docker Desktop.
-
-Clique no `ícone do Docker perto do relógio -> Settings -> Settings no topo -> Resources -> WSL Integration`.
-
-Habilite `Enable integration with my default WSL distro` e habilite sua versão Linux.
 
 ![Docker funcionando dentro do WSL 2](img/docker_funcionando_dentro_do_wsl2.png)
 
